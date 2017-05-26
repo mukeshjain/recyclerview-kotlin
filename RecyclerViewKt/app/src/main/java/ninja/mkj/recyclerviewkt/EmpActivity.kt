@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import com.google.gson.Gson
 import com.ml.myfirstkotlineapp.adapters.EmpViewAdapter
@@ -13,8 +14,15 @@ import com.ml.myfirstkotlineapp.dao.CustomItemClickListener
 import com.ml.myfirstkotlineapp.models.Employee
 import java.util.*
 
+/**
+ * Created by mukesh on 5/25/17.
+ */
+
 class EmpActivity : AppCompatActivity() {
 
+    private val TAG = EmpActivity::class.java.simpleName
+
+    /* A variable that can hold null, need to add a ? after the variable’s type */
     private var mRecyclerView: RecyclerView? = null
     private var mLayoutManager: LinearLayoutManager? = null
     private var mEmpViewAdapter: EmpViewAdapter? = null
@@ -33,12 +41,14 @@ class EmpActivity : AppCompatActivity() {
     fun initObj(){
         mRecyclerView = findViewById(R.id.rv_emp) as RecyclerView
         mEmpList = loadEmp()
+
         mEmpViewAdapter = EmpViewAdapter(this, mEmpList!!, object : CustomItemClickListener {
             override fun onItemClick(v: View, position: Int) {
                 startHomeActivity(position)
             }
         })
         mLayoutManager = LinearLayoutManager(applicationContext)
+        /* !! sure if it is not null */
         mRecyclerView!!.layoutManager = mLayoutManager
         mRecyclerView!!.itemAnimator = DefaultItemAnimator()
         mRecyclerView!!.adapter = mEmpViewAdapter
@@ -49,7 +59,9 @@ class EmpActivity : AppCompatActivity() {
         mEmpList = ArrayList<Employee>()
         var emp: Employee?
 
-        for (i in 1..4) {
+        logDebuge(mEmpIdList.indices.toString())
+
+        for (i in mEmpIdList.indices) {
             emp = Employee(mEmpIdList[i], mEmpNameList[i], mEmpDesgList[i], mEmpSalList[i])
             mEmpList!!.add(emp)
         }
@@ -62,4 +74,9 @@ class EmpActivity : AppCompatActivity() {
         intent.putExtra("Emp", gson.toJson(mEmpList!!.get(po)))
         startActivity(intent)
     }
+
+    private fun logDebuge(message: String) {
+        Log.d(TAG, message)
+    }
+
 }

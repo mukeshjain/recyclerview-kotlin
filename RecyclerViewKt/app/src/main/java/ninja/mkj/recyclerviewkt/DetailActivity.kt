@@ -11,6 +11,10 @@ import com.google.gson.reflect.TypeToken
 import com.ml.myfirstkotlineapp.models.Employee
 import ninja.mkj.recyclerviewkt.utils.ActionBarView
 
+/**
+ * Created by mukesh on 5/23/17.
+ */
+
 class DetailActivity : AppCompatActivity() {
 
     private val TAG = DetailActivity::class.java.simpleName

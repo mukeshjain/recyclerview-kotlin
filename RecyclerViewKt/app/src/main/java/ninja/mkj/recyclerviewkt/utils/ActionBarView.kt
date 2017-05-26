@@ -2,6 +2,10 @@ package ninja.mkj.recyclerviewkt.utils
 
 import android.support.v7.app.AppCompatActivity
 
+/**
+ * Created by mukesh on 5/25/17.
+ */
+
 class ActionBarView(internal var activity: AppCompatActivity) {
 
     fun setActionBar() {
